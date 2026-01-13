@@ -49,7 +49,7 @@ The homepage acts as a live dashboard:
 
 ## Characters
 
-https://github.com/user-attachments/assets/463decee-2381-444c-95a8-ad5014ff95e6
+https://github.com/user-attachments/assets/c93a2493-1662-4e29-bbe1-1b1b34bbda70
 
 The character section supports two distinct presentation modes:
 - **Icon grid view** for fast browsing
@@ -66,7 +66,7 @@ All filtering and sorting logic is handled client-side for responsiveness.
 
 ## Patches
 
-https://github.com/user-attachments/assets/e98a289f-2898-46ef-8e6a-978b1adff148
+https://github.com/user-attachments/assets/e5e4d02d-be52-426f-b250-838d4e753997
 
 Patch data can be explored through:
 - **Timeline view** for chronological context
@@ -82,7 +82,7 @@ In timeline mode:
 
 ## Relics
 
-https://github.com/user-attachments/assets/dbd302bf-48f3-4bb0-80fa-dee0342f614c
+https://github.com/user-attachments/assets/20a27313-135d-421d-8093-8cd185db077c
 
 This entire section is a **Vanilla JS SPA**. I wanted to challenge myself to build a reactive, state-driven UI without the "safety net" of a framework, focusing on DOM manipulation and clean event handling.
 
@@ -90,7 +90,7 @@ This entire section is a **Vanilla JS SPA**. I wanted to challenge myself to bui
 
 ## User Panel
 
-https://github.com/user-attachments/assets/1bb7ee16-1590-479a-a686-be47e412b73d
+https://github.com/user-attachments/assets/f6d38114-072b-4f29-bd8f-f4f683967ed7
 
 The user panel is the **only Vue-powered section** of the application.
 
