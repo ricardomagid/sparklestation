@@ -1,7 +1,7 @@
 # SparkleStation  
-### Personal Honkai: Star Rail Data Hub
+### Personal HSR Data Hub
 
-SparkleStation is a **Laravel-based web project** built as a personal hub for **Honkai: Star Rail** data with a focus on data presentation, UI experimentation and small interactive systems.
+SparkleStation is a **Laravel-based web project** built as a personal hub for **HSR** data with a focus on data presentation, UI experimentation and small interactive systems.
 
 This project was created as a **learning and portfolio project**.
 
