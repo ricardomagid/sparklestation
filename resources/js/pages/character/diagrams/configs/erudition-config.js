@@ -1,0 +1,25 @@
+export default {
+    width: 612,
+    height: 612,
+    backgroundImage: 'erudition-diagram.png',
+    circles: [
+        { x: 301, y: 119, size: 'large', type: 'ability', data: { id: 1, name: 'Talent' } },
+        { x: 301, y: 305, size: 'large', type: 'ability', data: { id: 2, name: 'Ultimate' } },
+        { x: 300, y: 563, size: 'large', type: 'ability', data: { id: 3, name: 'Technique' } },
+        { x: 202, y: 305, size: 'large', type: 'ability', data: { id: 4, name: 'Basic ATK' } },
+        { x: 400, y: 305, size: 'large', type: 'ability', data: { id: 5, name: 'Skill' } },
+        { x: 211, y: 548, size: 'small', type: 'sideTrace', data: { id: 6, name: 'trace0' } },
+        { x: 100, y: 305, size: 'medium', type: 'mainTrace', data: { id: 7, name: 'trace1' } },
+        { x: 12, y: 306, size: 'small', type: 'sideTrace', data: { id: 8, name: 'trace2' } },
+        { x: 84, y: 414, size: 'small', type: 'sideTrace', data: { id: 9, name: 'trace3' } },
+        { x: 83, y: 195, size: 'small', type: 'sideTrace', data: { id: 10, name: 'trace4' } },
+        { x: 502, y: 305, size: 'medium', type: 'mainTrace', data: { id: 11, name: 'trace5' } },
+        { x: 591, y: 305, size: 'small', type: 'sideTrace', data: { id: 12, name: 'trace6' } },
+        { x: 517, y: 416, size: 'small', type: 'sideTrace', data: { id: 13, name: 'trace7' } },
+        { x: 517, y: 193, size: 'small', type: 'sideTrace', data: { id: 14, name: 'trace8' } },
+        { x: 301, y: 1, size: 'medium', type: 'mainTrace', data: { id: 15, name: 'trace9' } },
+        { x: 192, y: 30, size: 'small', type: 'sideTrace', data: { id: 16, name: 'trace10' } },
+        { x: 410, y: 30, size: 'small', type: 'sideTrace', data: { id: 17, name: 'trace11' } },
+        { x: 389, y: 550, size: 'small', type: 'sideTrace', data: { id: 18, name: 'trace12' } },
+    ]
+}

@@ -1,0 +1,27 @@
+export default {
+    width: 612,
+    height: 612,
+    backgroundImage: 'remembrance-diagram.png',
+    circles: [
+        { x: 482, y: 305, size: 'large', type: 'ability', data: { id: 1, name: 'Talent' } },
+        { x: 301, y: 427, size: 'large', type: 'ability', data: { id: 2, name: 'Ultimate' } },
+        { x: 115, y: 305, size: 'large', type: 'ability', data: { id: 3, name: 'Technique' } },
+        { x: 186, y: 389, size: 'large', type: 'ability', data: { id: 4, name: 'Basic ATK' } },
+        { x: 413, y: 386, size: 'large', type: 'ability', data: { id: 5, name: 'Skill' } },
+        { x: 302, y: 205, size: 'large', type: 'ability', data: { id: 6, name: 'Memosprite Talent' } },
+        { x: 301, y: 310, size: 'large', type: 'ability', data: { id: 7, name: 'Memosprite Skill' } },
+        { x: 9, y: 306, size: 'small', type: 'sideTrace', data: { id: 8, name: 'trace0' } },
+        { x: 591, y: 304, size: 'medium', type: 'mainTrace', data: { id: 9, name: 'trace1' } },
+        { x: 83, y: 195, size: 'small', type: 'sideTrace', data: { id: 10, name: 'trace2' } },
+        { x: 85, y: 415, size: 'small', type: 'sideTrace', data: { id: 11, name: 'trace3' } },
+        { x: 516, y: 194, size: 'small', type: 'sideTrace', data: { id: 12, name: 'trace4' } },
+        { x: 300, y: 564, size: 'medium', type: 'mainTrace', data: { id: 13, name: 'trace5' } },
+        { x: 519, y: 415, size: 'small', type: 'sideTrace', data: { id: 14, name: 'trace6' } },
+        { x: 212, y: 548, size: 'small', type: 'sideTrace', data: { id: 15, name: 'trace7' } },
+        { x: 388, y: 550, size: 'small', type: 'sideTrace', data: { id: 16, name: 'trace8' } },
+        { x: 213, y: 187, size: 'medium', type: 'mainTrace', data: { id: 17, name: 'trace9' } },
+        { x: 139, y: 103, size: 'small', type: 'sideTrace', data: { id: 18, name: 'trace10' } },
+        { x: 221, y: 38, size: 'small', type: 'sideTrace', data: { id: 19, name: 'trace11' } },
+        { x: 324, y: 17, size: 'small', type: 'sideTrace', data: { id: 20, name: 'trace12' } },
+    ]
+}

@@ -1,0 +1,25 @@
+export default {
+    width: 612,
+    height: 612,
+    backgroundImage: 'abundance-diagram.png',
+    circles: [
+        { x: 301, y: 220, size: 'large', type: 'ability', data: { id: 1, name: 'Talent' } },
+        { x: 301, y: 393, size: 'large', type: 'ability', data: { id: 2, name: 'Ultimate' } },
+        { x: 301, y: 450, size: 'large', type: 'ability', data: { id: 3, name: 'Technique' } },
+        { x: 208, y: 345, size: 'large', type: 'ability', data: { id: 4, name: 'Basic ATK' } },
+        { x: 392, y: 345, size: 'large', type: 'ability', data: { id: 5, name: 'Skill' } },
+        { x: 386, y: 590, size: 'small', type: 'sideTrace', data: { id: 6, name: 'trace0' } },
+        { x: 451, y: 514, size: 'medium', type: 'mainTrace', data: { id: 7, name: 'trace1' } },
+        { x: 507, y: 461, size: 'small', type: 'sideTrace', data: { id: 8, name: 'trace2' } },
+        { x: 551, y: 417, size: 'small', type: 'sideTrace', data: { id: 9, name: 'trace3' } },
+        { x: 497, y: 335, size: 'small', type: 'sideTrace', data: { id: 10, name: 'trace4' } },
+        { x: 146, y: 514, size: 'medium', type: 'mainTrace', data: { id: 11, name: 'trace5' } },
+        { x: 89, y: 461, size: 'small', type: 'sideTrace', data: { id: 12, name: 'trace6' } },
+        { x: 44, y: 417, size: 'small', type: 'sideTrace', data: { id: 13, name: 'trace7' } },
+        { x: 104, y: 337, size: 'small', type: 'sideTrace', data: { id: 14, name: 'trace8' } },
+        { x: 301, y: 1, size: 'medium', type: 'mainTrace', data: { id: 15, name: 'trace9' } },
+        { x: 409, y: 30, size: 'small', type: 'sideTrace', data: { id: 16, name: 'trace10' } },
+        { x: 193, y: 30, size: 'small', type: 'sideTrace', data: { id: 17, name: 'trace11' } },
+        { x: 215, y: 592, size: 'small', type: 'sideTrace', data: { id: 18, name: 'trace12' } },
+    ]
+}

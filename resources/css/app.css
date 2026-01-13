@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+.scroll-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 8px; 
+}
+  
+::-webkit-scrollbar-thumb {
+    background-color: #e3342f; 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f4f4f4;
+}
+
+/* Table Style */
+.sparkle-table {
+    @apply table-auto; 
+}
+
+.sparkle-table td, 
+.sparkle-table th
+{
+    @apply text-center border-r border-black;
+}
+
+.sparkle-table td:last-child, 
+.sparkle-table th:last-child {
+    @apply border-0; 
+}
+
+
+.sparkle-table th {
+    @apply text-white px-5;
+}
+
+.sparkle-table td {
+    @apply bg-mauve;
+}
+
+.sparkle-table thead {
+    @apply bg-ruby;
+}
+
+.sparkle-table tbody {
+    @apply bg-mauve;
+}
+
+.sparkle-table-scrollbar::-webkit-scrollbar {
+    height: 8px;
+}
+
+.sparkle-table-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(189, 11, 32, 0.671);
+    border-radius: 4px;
+}
+
+/* Modal Style */
+.modal-enter-active {
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.modal-leave-active {
+transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Button Style */
+.auth-button {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: white;
+    background-color: #991b1b;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.auth-button:hover {
+    background-color: #7f1414;
+}
+
+.item-active {
+    @apply bg-ruby;
+}
+
+/* Filter Style */
+.filter-button {
+    @apply mt-2 w-10 h-10 rounded-lg bg-gradient-to-br from-red-300 via-red-400 to-red-500 shadow-md hover:shadow-lg cursor-pointer;
+}
+.filter-activated {
+    @apply from-red-500 via-red-600 to-red-700;
+}
+
+/* Notification Style */
+#notifications-container{
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 9999;
+  pointer-events: none;
+  width: min(90%, 40rem);
+  align-items: center;
+}
+
+.flash-message {
+  position: relative;
+  left: 0;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transform: translateY(-10px) scale(0.98);
+  opacity: 0;
+  transition: transform 300ms ease, opacity 300ms ease;
+  pointer-events: auto;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flash-message.show {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.flash-message.hide {
+  transform: translateY(-10px) scale(0.98);
+  opacity: 0;
+}
+
+.flash-message.error-message {
+    background-color: #e3342f
+}
+
+.flash-message.success-message {
+    background-color: green;
+}
+
+/* Animations */
+.smooth-transition {
+    @apply transition-all duration-300 ease-out;
+}

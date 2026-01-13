@@ -1,0 +1,164 @@
+/* Animations */
+#listView, #detailsView {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                scale 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(0);
+    opacity: 1;
+    scale: 1;
+}
+
+#listView.slide-out-left {
+    transform: translateX(-30%);
+    opacity: 0;
+    scale: 0.95;
+}
+
+#listView.slide-in-left {
+    transform: translateX(0);
+    opacity: 1;
+    scale: 1;
+}
+
+#detailsView.slide-out-right {
+    transform: translateX(30%);
+    opacity: 0;
+    scale: 0.95;
+}
+
+#detailsView.slide-in-right {
+    transform: translateX(0);
+    opacity: 1;
+    scale: 1;
+}
+
+/* Relic List */
+.icon-pop-up {
+    transform: none !important;
+    position: fixed;
+}
+
+/* Filter Style */
+.relic-filter-btn {
+    background-color: #f87171;
+    transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+    border-radius: 0.5rem;
+    color: white;
+}
+
+.relic-filter-btn:hover {
+    background-color: #991b1b;
+}
+
+.relic-filter-btn.active {
+    background-color: #dc2626;
+}
+
+.item-card {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(to bottom right, rgba(253, 242, 248, 0.4), rgba(245, 243, 255, 0.3));
+    backdrop-filter: blur(4px);
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+    border: 2px solid rgba(251, 207, 232, 0.4);
+    transition: all 0.3s;
+    cursor: pointer;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-card:hover {
+    border-color: #dc2626;
+    box-shadow: 0 25px 50px rgba(220, 38, 38, 0.2);
+    background: linear-gradient(to bottom right, rgba(255, 209, 220, 0.6), rgba(243, 232, 255, 0.5));
+}
+
+.item-card img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/** Relic Details **/
+#relicWrapper {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
+#planarWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#planarWrapper img {
+    width: 110px;
+}
+
+#planarWrapper>div:nth-child(1) {
+    align-self: flex-end;
+    margin-left: 20%;
+}
+
+#planarWrapper>div:nth-child(2) {
+    align-self: flex-start;
+    margin-right: 20%;
+}
+
+#relicWrapper>div:nth-child(1) {
+    grid-row-start: 1;
+    grid-column-start: 2;
+}
+
+#relicWrapper>div:nth-child(2) {
+    grid-row-start: 2;
+    grid-column-start: 1;
+}
+
+#relicWrapper>div:nth-child(3) {
+    grid-row-start: 2;
+    grid-column-start: 3;
+}
+
+#relicWrapper>div:nth-child(4) {
+    grid-row-start: 3;
+    grid-column-start: 2;
+}
+
+@keyframes pulse-glow {
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(234, 179, 8, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(234, 179, 8, 0.5);
+    }
+}
+
+@keyframes active-glow {
+    0%,
+    100% {
+        box-shadow: 0 0 25px rgba(234, 179, 8, 0.6), 0 0 40px rgba(234, 179, 8, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 35px rgba(234, 179, 8, 0.8), 0 0 50px rgba(234, 179, 8, 0.5);
+    }
+}
+
+.relic-piece:hover {
+    animation: pulse-glow 2s infinite;
+}
+
+.relic-piece.active {
+    animation: active-glow 2s infinite;
+    border-color: rgb(234, 179, 8) !important;
+}

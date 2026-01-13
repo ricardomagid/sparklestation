@@ -1,0 +1,25 @@
+export default {
+    width: 612,
+    height: 612,
+    backgroundImage: 'the-hunt-diagram.png',
+    circles: [
+        { x: 315, y: 163, size: 'large', type: 'ability', data: { id: 1, name: 'Talent' } },
+        { x: 319, y: 305, size: 'large', type: 'ability', data: { id: 2, name: 'Ultimate' } },
+        { x: 318, y: 506, size: 'large', type: 'ability', data: { id: 3, name: 'Technique' } },
+        { x: 218, y: 250, size: 'large', type: 'ability', data: { id: 4, name: 'Basic ATK' } },
+        { x: 402, y: 258, size: 'large', type: 'ability', data: { id: 5, name: 'Skill' } },
+        { x: 319, y: 594, size: 'small', type: 'sideTrace', data: { id: 6, name: 'trace0' } },
+        { x: 221, y: 514, size: 'medium', type: 'mainTrace', data: { id: 7, name: 'trace1' } },
+        { x: 166, y: 460, size: 'small', type: 'sideTrace', data: { id: 8, name: 'trace2' } },
+        { x: 114, y: 410, size: 'small', type: 'sideTrace', data: { id: 9, name: 'trace3' } },
+        { x: 148, y: 209, size: 'small', type: 'sideTrace', data: { id: 10, name: 'trace4' } },
+        { x: 413, y: 515, size: 'medium', type: 'mainTrace', data: { id: 11, name: 'trace5' } },
+        { x: 469, y: 457, size: 'small', type: 'sideTrace', data: { id: 12, name: 'trace6' } },
+        { x: 517, y: 409, size: 'small', type: 'sideTrace', data: { id: 13, name: 'trace7' } },
+        { x: 484, y: 210, size: 'small', type: 'sideTrace', data: { id: 14, name: 'trace8' } },
+        { x: 315, y: 82, size: 'medium', type: 'mainTrace', data: { id: 15, name: 'trace9' } },
+        { x: 315, y: 9, size: 'small', type: 'sideTrace', data: { id: 16, name: 'trace10' } },
+        { x: 184, y: 39, size: 'small', type: 'sideTrace', data: { id: 17, name: 'trace11' } },
+        { x: 447, y: 40, size: 'small', type: 'sideTrace', data: { id: 18, name: 'trace12' } },
+    ]
+}

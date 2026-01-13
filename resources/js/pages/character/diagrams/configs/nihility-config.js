@@ -1,0 +1,25 @@
+export default {
+    width: 612,
+    height: 612,
+    backgroundImage: 'nihility-diagram.png',
+    circles: [
+        { x: 300, y: 93, size: 'large', type: 'ability', data: { id: 1, name: 'Talent' } },
+        { x: 300, y: 240, size: 'large', type: 'ability', data: { id: 2, name: 'Ultimate' } },
+        { x: 301, y: 309, size: 'large', type: 'ability', data: { id: 3, name: 'Technique' } },
+        { x: 160, y: 266, size: 'large', type: 'ability', data: { id: 4, name: 'Basic ATK' } },
+        { x: 438, y: 265, size: 'large', type: 'ability', data: { id: 5, name: 'Skill' } },
+        { x: 300, y: 478, size: 'small', type: 'sideTrace', data: { id: 6, name: 'trace0' } },
+        { x: 116, y: 223, size: 'medium', type: 'mainTrace', data: { id: 7, name: 'trace1' } },
+        { x: 62, y: 264, size: 'small', type: 'sideTrace', data: { id: 8, name: 'trace2' } },
+        { x: 106, y: 327, size: 'small', type: 'sideTrace', data: { id: 9, name: 'trace3' } },
+        { x: 158, y: 399, size: 'small', type: 'sideTrace', data: { id: 10, name: 'trace4' } },
+        { x: 481, y: 220, size: 'medium', type: 'mainTrace', data: { id: 11, name: 'trace5' } },
+        { x: 533, y: 264, size: 'small', type: 'sideTrace', data: { id: 12, name: 'trace6' } },
+        { x: 489, y: 327, size: 'small', type: 'sideTrace', data: { id: 13, name: 'trace7' } },
+        { x: 436, y: 398, size: 'small', type: 'sideTrace', data: { id: 14, name: 'trace8' } },
+        { x: 301, y: 1, size: 'medium', type: 'mainTrace', data: { id: 15, name: 'trace9' } },
+        { x: 192, y: 31, size: 'small', type: 'sideTrace', data: { id: 16, name: 'trace10' } },
+        { x: 408, y: 31, size: 'small', type: 'sideTrace', data: { id: 17, name: 'trace11' } },
+        { x: 300, y: 565, size: 'small', type: 'sideTrace', data: { id: 18, name: 'trace12' } },
+    ]
+}
