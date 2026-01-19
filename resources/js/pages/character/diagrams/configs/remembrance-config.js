@@ -23,5 +23,6 @@ export default {
         { x: 139, y: 103, size: 'small', type: 'sideTrace', data: { id: 18, name: 'trace10' } },
         { x: 221, y: 38, size: 'small', type: 'sideTrace', data: { id: 19, name: 'trace11' } },
         { x: 324, y: 17, size: 'small', type: 'sideTrace', data: { id: 20, name: 'trace12' } },
+        { x: 401, y: 113, size: 'medium', type: 'mainTrace', data: { id: 21, name: 'trace13' } },
     ]
 }

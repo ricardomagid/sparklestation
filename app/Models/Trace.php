@@ -17,6 +17,6 @@ class Trace extends Model
 
     public function main_trace_img($i)
     {
-        return asset("images/traces/{$this->character->name}-" . str_pad($i, 2, '0', STR_PAD_LEFT) . ".webp");
+        return asset("images/traces/{$this->character->slug}-" . str_pad($i, 2, '0', STR_PAD_LEFT) . ".webp");
     }
 }

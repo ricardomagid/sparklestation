@@ -253,17 +253,21 @@ export function updateAbilitySlider(slider, updateAbilityPositions = true) {
     const category = slider.dataset.ability;
 
     // Assign the value and text content for both mobile and desktop layouts
-    document.querySelectorAll(`[data-skill-panel="${category}"]`).forEach(panel => {
-        // Update the number display
-        panel.querySelectorAll(".ability-slider-number").forEach(el => {
-            el.textContent = level;
-        });
+    if (category) {
+        document.querySelectorAll(`[data-skill-panel="${category}"]`).forEach(panel => {
+            // Update the number display
+            panel.querySelectorAll(".ability-slider-number").forEach(el => {
+                el.textContent = level;
+            });
 
-        // Update the slider
-        panel.querySelectorAll(".ability-slider").forEach(slider => {
-            slider.value = level;
-        });
-    });
+            // Update the slider
+            panel.querySelectorAll(".ability-slider").forEach(slider => {
+                slider.value = level;
+            });
+        })
+    } else if (slider.classList.contains('side-panel-slider')){
+        document.querySelector("#sidePanel .ability-slider-number").textContent = level;
+    }
 
     let currentLayout;
 
@@ -508,20 +512,22 @@ function fillTraceMaterialContainer() {
     document.querySelectorAll(".mobile-trace-mat-container").forEach(container => {
         const traceId = container.dataset.traceId;
 
-        const mats = window.characterData.traceMaterials[traceId]
+        if (traceId != "trace13") {
+            const mats = window.characterData.traceMaterials[traceId]
 
-        mats.forEach(mat => {
-            const materialEl = document.createElement('div');
-            materialEl.className = 'flex flex-col items-center';
-            materialEl.innerHTML = `
+            mats.forEach(mat => {
+                const materialEl = document.createElement('div');
+                materialEl.className = 'flex flex-col items-center';
+                materialEl.innerHTML = `
                                     <div class="w-12 h-12 rounded-full bg-[#FFE0E0] p-1 flex items-center justify-center">
                                     <img src="${mat.material.image_url}" alt="${mat.material.name}" class="w-10 h-10 object-contain">
                                     </div>
                                     <span class="text-white text-xs mt-1 text-center break-words max-w-[4rem]">${mat.material.name}</span>
                                     <span class="text-yellow-200 text-xs font-bold">×${mat.quantity}</span>
                                 `;
-            container.appendChild(materialEl.cloneNode(true));
-        });
+                container.appendChild(materialEl.cloneNode(true));
+            });
+        }
     });
 }
 
@@ -599,9 +605,9 @@ export default function initializeCharacterPage() {
         }
 
         // Expand trace material panel for mobile on click
-        document.querySelectorAll(".main-trace-panel").forEach(panel => {
+        document.querySelectorAll('.main-trace-panel:not([data-trace-position="13"])').forEach(panel => {
             const arrow = panel.querySelector(".arrow");
-            const traceMaterialTab = panel.querySelector(".mobile-trace-mat-container");
+            const traceMaterialTab = panel.querySelector('.mobile-trace-mat-container');
 
             panel.addEventListener("click", () => {
                 // Check if panel is currently closed (has 'hidden' class)

@@ -6,9 +6,10 @@
     </div>
 
     <div class="space-y-3">
-        @foreach ($character->traces->whereIn('position', [1, 5, 9]) as $trace)
+        @foreach ($character->traces->whereIn('position', [1, 5, 9, 13]) as $trace)
             <div
-                class="relative bg-black/20 border border-red-500/70 rounded-lg hover:bg-black/30 cursor-pointer main-trace-panel p-5">
+                class="relative bg-black/20 border border-red-500/70 rounded-lg hover:bg-black/30 cursor-pointer main-trace-panel p-5"
+                data-trace-position="{{ $trace->position }}">
 
                 <div class="flex items-center justify-between">
                     <div class="flex items-start gap-4 flex-1">
@@ -21,11 +22,13 @@
                         </div>
                     </div>
 
-                    <!-- Arrow positioned within the header, not the entire panel -->
-                    <svg class="arrow w-5 h-5 text-red-400 transform transition-transform duration-300 flex-shrink-0"
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
+                    <!-- Arrow positioned within the header -->
+                    @if($trace->position != 13)
+                        <svg class="arrow w-5 h-5 text-red-400 transform transition-transform duration-300 flex-shrink-0"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    @endif
                 </div>
 
                 <!-- Materials -->

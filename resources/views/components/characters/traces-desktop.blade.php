@@ -22,7 +22,7 @@
             <div class="flex items-center py-3 rounded-lg" id="circleSlider">
                 <span class="text-white text-sm mr-3 w-20">Level: <span class="ability-slider-number"></span></span>
                 <input type="range" min="1" value="1"
-                    class="ability-slider trace-slider h-2 flex-grow appearance-none rounded-lg bg-red-500/50 accent-red-600">
+                    class="ability-slider trace-slider side-panel-slider h-2 flex-grow appearance-none rounded-lg bg-red-500/50 accent-red-600">
             </div>
             <div id="circleTraces" class="flex flex-col gap-4 mt-4"></div>
         </div>

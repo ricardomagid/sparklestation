@@ -54,10 +54,13 @@ export class DiagramManager {
 
     createCircles() {
         let mainTraceCounter = 1;
+
         this.config.circles.forEach(circleConfig => {
             let circleTitle = '';
             let circleTraceData = [];
             let circleSliderData = { visibility: false };
+            let materials = characterData.traceMaterials[circleConfig.data.name] ?? [];
+            const sliderHiddenFor = ['Technique']
 
             switch (circleConfig.type) {
                 case 'ability': {
@@ -66,7 +69,10 @@ export class DiagramManager {
                     circleTitle = circleConfig.data.name; // "Basic ATK", "Skill", etc
                     const isBasicAtkOrMemosprite = circleTitle === "Basic ATK" || circleTitle.includes("Memosprite");
                     const maxSliderLevel = isBasicAtkOrMemosprite ? 10 : 15;
-                    circleSliderData = { visibility: true, maxSliderLevel };
+                    
+                    if (!sliderHiddenFor.some(ability => circleTitle === ability)) {
+                        circleSliderData = { visibility: true, maxSliderLevel };
+                    }
                     const circleImageSkill = circleTitle.toLowerCase() === 'basic atk' ? 'basic' : circleTitle.toLowerCase().replace(/\s+/g, '-');;
                     const baseImagePath = `/images/abilities/${this.characterName}-${circleImageSkill}.webp`;
 
@@ -87,64 +93,69 @@ export class DiagramManager {
                     const trace = this.getTrace(circleConfig.data.name);
                     circleTitle = "Bonus Ability";
 
-                    const name = trace?.name || 'Unknown Trace';
-                    const description = trace?.description || '';
-                    const padded = String(mainTraceCounter).padStart(2, '0');
-                    const image = `/images/traces/${this.characterName}-${padded}.webp`;
-                    const materials = window.characterData.traceMaterials[circleConfig.data.name]
+                    if (trace) {
+                        const name = trace?.name || 'Unknown Trace';
+                        const description = trace?.description || '';
+                        const padded = String(mainTraceCounter).padStart(2, '0');
+                        const image = `/images/traces/${this.characterName}-${padded}.webp`;
 
-                    circleTraceData.push({
-                        name,
-                        description,
-                        image,
-                        values: [],
-                        id: null,
-                        materials: materials
-                    });
+                        circleTraceData.push({
+                            name,
+                            description,
+                            image,
+                            values: [],
+                            id: null,
+                            materials: materials
+                        });
+                    }
                     mainTraceCounter++;
                     break;
                 }
 
                 default: {
                     const trace = this.getTrace(circleConfig.data.name);
-                    circleTitle = "Trace";
 
-                    const name = trace?.name || 'Unknown Trace';
-                    const description = trace?.description || '';
-                    const image = `/images/traces/${this.getMinorTraceImage(name)}`;
-                    const materials = window.characterData.traceMaterials[circleConfig.data.name]
+                    if (trace) {
+                        circleTitle = "Trace";
 
-                    circleTraceData.push({
-                        name,
-                        description,
-                        image,
-                        values: [],
-                        id: null,
-                        materials: materials
-                    });
+                        const name = trace?.name || 'Unknown Trace';
+                        const description = trace?.description || '';
+                        const image = `/images/traces/${this.getMinorTraceImage(name)}`;
+
+                        circleTraceData.push({
+                            name,
+                            description,
+                            image,
+                            values: [],
+                            id: null,
+                            materials: materials
+                        });
+                    }
                     break;
                 }
             }
 
-            const circle = new Circle(
-                circleConfig.x,
-                circleConfig.y,
-                circleConfig.size,
-                circleConfig.type,
-                circleConfig.data,
-                circleTitle,
-                circleTraceData,
-                circleSliderData,
-                this.handleCircleClick.bind(this)
-            );
+            if (circleTraceData.length != 0) {
+                const circle = new Circle(
+                    circleConfig.x,
+                    circleConfig.y,
+                    circleConfig.size,
+                    circleConfig.type,
+                    circleConfig.data,
+                    circleTitle,
+                    circleTraceData,
+                    circleSliderData,
+                    this.handleCircleClick.bind(this)
+                );
 
-            // Create the SVG element and add it to the SVG
-            const defs = this.svg.querySelector('defs');
-            const circleElement = circle.create(defs);
-            this.svg.appendChild(circleElement);
+                // Create the SVG element and add it to the SVG
+                const defs = this.svg.querySelector('defs');
+                const circleElement = circle.create(defs);
+                this.svg.appendChild(circleElement);
 
-            // Store reference for later use
-            this.circles.push(circle);
+                // Store reference for later use
+                this.circles.push(circle);
+            }
         });
     }
 
@@ -233,7 +244,7 @@ export class DiagramManager {
             sidePanel.querySelector(".ability-slider-number").textContent = 1;
             sidePanel.querySelector(".trace-slider").value = 1;
 
-            // Add each data
+            // Add new data
             circle.circleData.forEach(({ name, description, image, values, id, materials }) => {
                 const abilityBlock = document.createElement("div");
                 abilityBlock.className = "bg-red-950/50 border border-red-800 p-3 rounded-lg";

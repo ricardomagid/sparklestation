@@ -255,7 +255,7 @@ class Character extends Model
 
         foreach ($this->traces as $trace) {
             // Skip main traces
-            if (in_array($trace->position, [1,5,9])) {
+            if (in_array($trace->position, [1,5,9,13])) {
                 continue;
             }
 
