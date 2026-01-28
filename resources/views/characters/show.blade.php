@@ -9,6 +9,11 @@
     {{-- Modal for Pictures --}}
     <x-modal.picture />
 
+    {{-- Modal for Unique Buffs --}}
+    @if ($character->universal_buff)
+        <x-dynamic-component :component="'modal.unique-buffs-' . $character->slug" :character="$character" />
+    @endif
+
     <script>
         const statsTable = @json($character->getStatsTable());
         const maxStatValues = @json($maxStatValues);

@@ -31,6 +31,10 @@ class Character extends Model
 
     protected $fillable = ['name', 'slug', 'element', 'path', 'faction', 'gender'];
 
+    protected $casts = [
+        'unique_buff_targets' => 'array'
+    ];
+
     // Auto-generate slug
     protected static function boot()
     {
@@ -45,6 +49,32 @@ class Character extends Model
                 $character->slug = Str::slug($character->name);
             }
         });
+    }
+
+    public function getUniqueBuffTargetsListAttribute()
+    {
+        $targets = Character::whereIn('id', $this->unique_buff_targets ?? [])
+            ->select('id', 'name', 'slug')
+            ->get();
+
+        $abilities = CharAbility::where('character_id', $this->id)
+            ->whereIn('target_character_id', $targets->pluck('id'))
+            ->get()
+            ->keyBy('target_character_id');
+
+        return $targets->map(function ($target) use ($abilities) {
+            $ability = $abilities->get($target->id);
+
+            return [
+                'id' => $target->id,
+                'slug' => $target->slug,
+                'name' => $target->name === 'Dan Heng • Permansor Terrae'
+                    ? 'Dan Heng'
+                    : $target->name,
+                'buff_title' => $ability?->name,
+                'buff_description' => $ability?->description,
+            ];
+        })->all();
     }
 
     public function patch(): BelongsTo
@@ -365,7 +395,37 @@ class Character extends Model
     public function getPathImgAttribute() 
     {
         return asset('images/paths/' . ucfirst($this->path->name) . '.webp');
-    }    
+    } 
+    
+    public function getUniqueBuffsImgAttribute()
+    {
+        return asset('images/abilities/' . $this->slug . '-unique-buffs.webp');
+    }
+
+    public function getUniqueBuffsModalImgAttribute()
+    {
+        return asset('images/modal/' . $this->slug . '/modal.png');
+    }
+
+    public function getUniqueBuffsSelectorImgAttribute()
+    {
+        return asset('images/modal/' . $this->slug . '/selector.png');
+    }
+
+    public function getUniqueBuffsSelectorSelectedImgAttribute()
+    {
+        return asset('images/modal/' . $this->slug . '/selector-selected.png');
+    }
+
+    public function uniqueBuffTargetCard(string $slug): string
+    {
+        return asset("images/modal/{$this->slug}/{$slug}-card.png");
+    }
+
+    public function uniqueBuffTargetIcon(string $slug): string
+    {
+        return asset("images/modal/{$this->slug}/{$slug}-icon.png");
+    }
 
     public function getFormattedStoryParts()
     {

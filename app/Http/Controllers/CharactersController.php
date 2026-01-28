@@ -34,12 +34,13 @@ class CharactersController extends Controller
 
     public function show(Character $character)
     {
-        $character->grouped_abilities = $character->abilities->groupBy(fn($a) => $a->ability->name);
-        if ($character->name === "Cyrene") {
-            if (isset($character->grouped_abilities['Memosprite Skill'])) {
-                $character->grouped_abilities['Memosprite Skill'] = $character->grouped_abilities['Memosprite Skill']->filter(fn($a) => !str_contains($a->name, "Ode to"));
-            }
-        }
+        // Isolate special talents and group each ability by name
+        [$standard, $unique] = $character->abilities->partition(fn($a) => $a->ability->name !== 'Unique Buffs');
+
+        $character->grouped_abilities = $standard->groupBy(fn($a) => $a->ability->name);
+        $character->universal_buff = $unique->first(fn($a) => $a->type->name === 'Universal Buff');
+        $character->specific_buffs = $unique->filter(fn($a) => $a->type->name === 'Specific Buff');
+
         $character->trace_materials = $character->getTraceMaterials();
         $character->total_minor_traces = $character->getTotalMinorTraces();
 

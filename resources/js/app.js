@@ -83,12 +83,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Call setupNotifications to initialize notifications
         setupNotifications();
 
-        // Load modal functionality if modal elements exista
+        // Load modal functionality if modal elements exists
         const modalConfigs = [
             { selector: '#imageModal', functions: ['openImageModal', 'closeImageModal'] },
             { selector: '#filterModal', functions: ['openFilterModal', 'closeFilterModal'] },
             { selector: '#timelineModal', functions: ['openTimelineModal', 'closeTimelineModal'] },
-            { selector: '#modalLoading', functions: ['openLoadingModal', 'closeLoadingModal', 'stopFetch'] }];
+            { selector: '#modalLoading', functions: ['openLoadingModal', 'closeLoadingModal', 'stopFetch'] },
+            { selector: '#uniqueBuffsModal', functions: ['openUniqueBuffsModal', 'closeUniqueBuffsModal']}];
 
         // Find which modals exist on the page
         const existingModals = modalConfigs.filter(({ selector }) =>
@@ -163,6 +164,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (document.getElementById('characterContent')) {
             import('./pages/character/show.js').then(mod => mod.default());
         }
+
+        if (document.getElementById('uniqueBuffsCyreneModal')) {
+            import('./pages/modal/unique-buffs-cyrene.js');
+        }        
 
         // Load item page functionality on lightcone show pages
         if (document.getElementById('lightconeContent')) {

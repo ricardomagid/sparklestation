@@ -119,7 +119,7 @@ export function openFilterModal(isCharacter) {
 }
 
 /**
- * Closes the filter modal with smooth animation
+ * Closes the filter modal
  */
 export function closeFilterModal() {
     const modal = document.getElementById('filterModal');
@@ -198,7 +198,7 @@ export async function openTimelineModal(patchId) {
 }
 
 /**
- * Closes the filter modal with smooth animation
+ * Closes the filter modal
  */
 export function closeTimelineModal() {
     const modal = document.getElementById('timelineModal');
@@ -243,5 +243,23 @@ export function openLoadingModal() {
  */
 export function closeLoadingModal() {
     const modal = document.getElementById("modalLoading");
+    animateModal(modal, false);
+}
+
+/**
+ * Open the unique buffs modal
+ */
+export function openUniqueBuffsModal() {
+    const modal = document.getElementById("uniqueBuffsModal")
+
+    animateModal(modal, true);
+}
+
+/**
+ * Close the unique buffs modal
+ */
+export function closeUniqueBuffsModal() {
+    const modal = document.getElementById("uniqueBuffsModal")
+
     animateModal(modal, false);
 }
