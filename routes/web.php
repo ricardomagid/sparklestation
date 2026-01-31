@@ -42,28 +42,25 @@ Route::get('/disambiguate', [DisambiguationController::class, 'show'])
 // Authentication Routes
 // ======================
 
+Route::middleware(['throttle:5,1'])->group(function () {
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+});
+
 // Show login form
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 
-// Process login
-Route::post('/login', [AuthController::class, 'login']);
-
 // Change password
-Route::post('/change-password', [AuthController::class, 'changePassword'])->name('password.change');
+Route::post('/change-password', [AuthController::class, 'changePassword'])->name('password.change')->middleware('throttle:3,1');
 
 // Show registration form
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-
-// Process registration
-Route::post('/register', [AuthController::class, 'register']);
-
-// Logout user
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // ======================
 // User Routes
 // ======================
 Route::middleware('auth')->group(function() {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/settings', [UserController::class, 'index'])->name('user.settings');
     Route::get('/user/inventory', [UserController::class, 'index'])->name('user.inventory');

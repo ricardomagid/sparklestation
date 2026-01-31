@@ -55,6 +55,8 @@ class AuthController extends Controller
 
         // Attempt to log the user in
         if (Auth::attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
+
             return redirect()->intended(route('home'))->with('success', 'Login Successful!');
         }
 
@@ -77,8 +79,8 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        //Redirect to the previous page or to the login page if not available
-        return redirect()->back()->with('success', 'Logout successful') ?? redirect('/login')->with('success', 'Logout successful');
+        // Redirect to home
+        return redirect('/')->with('success', 'Logout successful');
     }      
 
     /**
@@ -90,7 +92,7 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|email|exists:users,email',
             'new_password' => 'required|string|min:8|confirmed',
-            'verification_code' => 'required|numeric|min:6'
+            'verification_code' => 'required|numeric|digits:6'
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -99,7 +101,7 @@ class AuthController extends Controller
             return back()->withErrors(['code' => 'No verification code found.']);
         }
 
-        if ($request->verification_code != $user->verification_code) {
+        if ($request->verification_code !== $user->verification_code) {
             return back()->withErrors(['code' => 'Invalid verification code.']);
         }
 
