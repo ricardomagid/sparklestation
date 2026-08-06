@@ -1,9 +1,11 @@
 # SparkleStation  
 ### Personal HSR Data Hub
 
+**Status: Beta (v0.8)**
+
 SparkleStation is a **Laravel-based web project** built as a personal hub for **HSR** data with a focus on data presentation, UI experimentation and small interactive systems.
 
-This project was created as a **learning and portfolio project**.
+This project was created as a **learning exercise and portfolio project**.
 
 ---
 
@@ -14,7 +16,6 @@ This application provides:
 - Multiple **view modes** with sorting and filtering options
 - A mix of **MPA and SPA approaches**, depending on feature requirements
 - A relic rolling simulator to mimic the endless pursuit of a perfect piece.
-  (character rolling planned)
 
 The project serves both as a **personal exploration space** and a **technical showcase**.
 
@@ -112,14 +113,20 @@ Vue was chosen due to higher UI complexity and shared reactive state.
 - Improve handling of client-side state and AJAX interactions
 - Keep the codebase understandable and easy to extend
 
-This is a controlled technical playground, **not a production service**.
+This project serves as a controlled technical playground for experimenting with different approaches while maintaining a maintainable and understandable codebase.
 
 ---
 
-## Planned Features
+## Roadmap
 
+### v0.9
 - Character rolling system
 - Expanded user character management
+- Additional UI improvements
+
+### v1.0
+- Final documentation cleanup
+- Stable portfolio release
 
 ---
 
