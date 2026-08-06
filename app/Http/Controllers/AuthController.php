@@ -95,7 +95,7 @@ class AuthController extends Controller
             'verification_code' => 'required|numeric|digits:6'
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->firstOrFail();
 
         if (!$user->verification_code) {
             return back()->withErrors(['code' => 'No verification code found.']);
@@ -116,6 +116,6 @@ class AuthController extends Controller
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        return redirect()->route('home')->with('success', 'Your password has been changed successfully.');
+        return redirect()->route('login')->with('success', 'Your password has been changed successfully.');
     }
 }
