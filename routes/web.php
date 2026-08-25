@@ -8,6 +8,7 @@ use App\Http\Controllers\CharactersController;
 use App\Http\Controllers\LightconesController;
 use App\Http\Controllers\RelicsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GachaController;
 use App\Http\Controllers\DisambiguationController;
 
 // ======================
@@ -65,5 +66,6 @@ Route::middleware('auth')->group(function() {
     Route::get('/user/settings', [UserController::class, 'index'])->name('user.settings');
     Route::get('/user/inventory', [UserController::class, 'index'])->name('user.inventory');
     Route::get('/user/characters', [UserController::class, 'index'])->name('user.characters');
+    Route::get('/gacha', [GachaController::class, 'index'])->name('gacha.index');
 });
 

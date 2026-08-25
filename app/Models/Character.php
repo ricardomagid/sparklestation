@@ -29,6 +29,8 @@ class Character extends Model
 
     public $timestamps = false;
 
+    protected $appends = ['path_img', 'element_img', 'icon_img'];
+
     protected $fillable = ['name', 'slug', 'element', 'path', 'faction', 'gender'];
 
     protected $casts = [

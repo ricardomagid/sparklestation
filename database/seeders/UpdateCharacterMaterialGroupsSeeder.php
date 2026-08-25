@@ -12,19 +12,22 @@ class UpdateCharacterMaterialGroupsSeeder extends Seeder
      */
     public function run(): void
     {
-        // Get all characters
         $characters = DB::table('characters')->get();
 
         foreach ($characters as $character) {
-            // Get the material group slug for character material
+            if (!is_numeric($character->enemy_material_group)) {
+                continue;
+            }
+
             $materialGroupSlug = DB::table('materials')
                 ->where('id', $character->enemy_material_group)
                 ->value('material_group');
 
-            // Update the character material group
             DB::table('characters')
                 ->where('id', $character->id)
-                ->update(['enemy_material_group' => $materialGroupSlug]);
+                ->update([
+                    'enemy_material_group' => $materialGroupSlug
+                ]);
         }
     }
 }

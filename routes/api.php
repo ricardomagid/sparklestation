@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\PatchController;
 use App\Http\Controllers\Api\RelicController;
 use App\Http\Controllers\Api\RelicInventoryController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\GachaController;
 
 // Database changes
 Route::post('/sync', [SyncController::class, 'store']);
@@ -28,6 +29,7 @@ Route::post('/profile/update', [UserController::class, 'updateProfile'])
 
 // User Preferences
 Route::post('/user/update', [UserController::class, 'updateUserPreferences'])->name('user-preferences.update')->middleware('web');
+Route::post('/user/featured', [UserController::class, 'updateFeaturedItem'])->name('user.featured.update')->middleware('web');
 
 // Email Verification
 Route::post('/email/verification', [UserController::class, 'sendVerificationEmail'])->name('email-verification')->middleware('web');
@@ -35,3 +37,6 @@ Route::post('/email/verification', [UserController::class, 'sendVerificationEmai
 // User Inventory
 Route::get('/inventory', [RelicInventoryController::class, 'index'])->name('inventory.index')->middleware('web');
 Route::post('/relics/generate', [RelicInventoryController::class, 'generateRelics'])->name('relics.generate')->middleware('web');
+
+// Gacha
+Route::post('/gacha/pull', [GachaController::class, 'submitPull'])->name('gacha.submitPull')->middleware('web');

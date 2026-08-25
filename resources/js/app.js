@@ -193,6 +193,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (document.getElementById("adminApp")) {
             import('./pages/admin/admin-app.js');
         }
+
+        // Load gacha page functionality on gacha page
+        if (document.getElementById("gachaContent")) {
+            import('./pages/gacha.js');
+        }
     } catch (error) {
         console.error('Init failed', error);
     }

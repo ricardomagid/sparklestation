@@ -22,6 +22,8 @@ class Lightcone extends Model
 
     public $timestamps = false;
 
+    protected $appends = ['path_img', 'icon_img'];
+
     protected $fillable = ['name', 'slug', 'path'];
 
     public function path(): BelongsTo

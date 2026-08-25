@@ -140,4 +140,47 @@ class UserController extends Controller
             ], 500);
         }
     }
+
+    public function updateFeaturedItem(Request $request)
+    {
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User is not authenticated'
+            ], 401);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'featured_character_id' => 'sometimes|nullable|integer|exists:characters,id',
+            'featured_lightcone_id' => 'sometimes|nullable|integer|exists:lightcones,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors'  => $validator->errors()
+            ], 422);
+        }
+
+        $validated = $validator->validated();
+
+        if (array_key_exists('featured_character_id', $validated)) {
+            $user->featured_character_id = $validated['featured_character_id'];
+        }
+
+        if (array_key_exists('featured_lightcone_id', $validated)) {
+            $user->featured_lightcone_id = $validated['featured_lightcone_id'];
+        }
+
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Featured item updated successfully',
+            'user'    => $user
+        ]);
+    }
 }

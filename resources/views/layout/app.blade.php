@@ -28,8 +28,10 @@
             <div class="flex flex-col space-y-7">
                 <x-nav-item text="Home" imgSrc="images/icons/Home.png" link="{{ route('home') }}" />
                 <x-nav-item text="Patches" imgSrc="images/icons/Books.png" link="{{ route('patches') }}" />
-                <x-nav-item text="Characters" imgSrc="images/icons/Characters.png" link="{{ route('characters.index') }}" />
-                <x-nav-item text="Lightcones" imgSrc="images/icons/Lightcones.png" link="{{ route('lightcones.index') }}" />
+                <x-nav-item text="Characters" imgSrc="images/icons/Characters.png"
+                    link="{{ route('characters.index') }}" />
+                <x-nav-item text="Lightcones" imgSrc="images/icons/Lightcones.png"
+                    link="{{ route('lightcones.index') }}" />
                 <x-nav-item text="Relics" imgSrc="images/icons/Relics.png" link="{{ route('relics.index') }}" />
             </div>
         </nav>
@@ -77,8 +79,12 @@
                 <x-auth-layout :userId="$userId" variant="right" />
             </div>
 
-            {{-- Website Settings --}}
             @auth
+                {{-- Character Rolling --}}
+                <div class="flex flex-col h-1/6 w-full">
+                    <x-nav-item text="Gacha" imgSrc="images/icons/Gacha.png" link="{{ route('gacha.index') }}" />
+                </div>
+                {{-- Website Settings --}}
                 <div class="flex flex-col h-1/6 w-full">
                     <x-nav-item text="User Panel" imgSrc="images/icons/Settings.png" link="{{ route('user.index') }}" />
                 </div>
