@@ -116,6 +116,7 @@
                 <button class="sparkle-button" id="itemSelectionButton"></button>
             </div>
 
+            @include('gacha.partials.pull-loading')
             @include('gacha.partials.pull-reveal')
 
         </div>

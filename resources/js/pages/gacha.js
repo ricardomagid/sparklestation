@@ -23,6 +23,19 @@ const PULL_SLIDE_DURATION = 500;
 const PULL_SLIDE_STAGGER = 140;
 const PULL_LAND_PAUSE = 150;
 
+const pullLoadingOverlay = document.getElementById('pullLoadingOverlay');
+const pullWarpParticles = document.getElementById('pullWarpParticles');
+const pullWarpStatus = document.getElementById('pullWarpStatus');
+
+let pullStatusInterval = null;
+
+const pullLoadingMessages = [
+  'Establishing connection...',
+  'Calculating trajectory...',
+  'Traversing the stars...',
+  'Resolving signal...',
+];
+
 function setSelectionMode(type) {
   selectionMode = type;
   updateUI();
@@ -179,7 +192,7 @@ elements.selectionButton?.addEventListener('click', () => {
   const type = selectionMode;
   const selectedId = currentId[type];
   const activePanel = document.querySelector(`[data-panel="${type}"]`);
-  
+
   if (activePanel) {
     activePanel.dataset.featuredId = selectedId;
   }
@@ -195,45 +208,86 @@ elements.selectionButton?.addEventListener('click', () => {
 
 // API Pull Action
 elements.pullButtons.forEach(button => {
-  button.addEventListener("click", async (event) => {
-    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
-    const pullCount = parseInt(event.currentTarget.dataset.count, 10);
-    const activePanel = document.querySelector('[data-panel].active');
+  button.addEventListener('click', async event => {
+    const csrfToken =
+      document.querySelector('meta[name="csrf-token"]').content;
 
-    if (!activePanel) return;
+    const pullCount =
+      parseInt(event.currentTarget.dataset.count, 10);
+
+    const activePanel =
+      document.querySelector('[data-panel].active');
 
     const type = activePanel.dataset.panel;
     const id = activePanel.dataset.featuredId;
 
+    document
+      .querySelectorAll('.pullButton')
+      .forEach(btn => btn.disabled = true);
+
+    showPullLoading();
+
     try {
-      const res = await fetch('/api/gacha/pull', {
+      const response = await fetch('/api/gacha/pull', {
         method: 'POST',
+
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'X-CSRF-TOKEN': csrfToken,
         },
-        body: JSON.stringify({ pullCount, type, itemId: id })
+
+        body: JSON.stringify({
+          pullCount,
+          type,
+          itemId: id,
+        }),
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || `Server error (${res.status})`);
+      if (!response.ok) {
+        throw new Error(
+          `Request failed with status ${response.status}`
+        );
       }
 
-      showPullReveal(data.pulls, type);
-      activePanel.querySelector(".pity-count").textContent = data.fiveStarPity;
-    } catch (err) {
-      newNotification("error", `Pull error: ${err.message || err}`);
+      const data = await response.json();
+
+      const hasFiveStar = data.pulls.some(pull => pull.rarity === 5);
+
+      pullLoadingOverlay.classList.toggle('five-star', hasFiveStar);
+
+      await hidePullLoading();
+
+      if (data) {
+        showPullReveal(data.pulls, type);
+
+        const activePanel = document.querySelector("[data-panel].active");
+        activePanel.querySelector(".pity-count").textContent = data.fiveStarPity;
+
+        return;
+      }
+
+      throw new Error(
+        data?.message || 'Unknown error'
+      );
+
+    } catch (error) {
+      hidePullLoading(false);
+
+      document
+        .querySelectorAll('.pullButton')
+        .forEach(btn => btn.disabled = false);
+
+      newNotification(
+        'error',
+        `Pull error: ${error.message}`
+      );
     }
   });
 });
 
 function showPullReveal(pulls, type) {
   const count = pulls.length;
-
-  elements.pullButtons.forEach(btn => btn.disabled = true);
 
   elements.pullRevealField.className = `grid gap-4 justify-center ${count === 1 ? 'grid-cols-1' : 'grid-cols-5'}`;
   elements.pullRevealField.innerHTML = '';
@@ -314,10 +368,105 @@ async function updateFeaturedItem(type, itemId) {
     const data = await res.json();
     if (!res.ok || !data.success) {
       newNotification("error", `Failed to save featured ${type}: ${data.message || 'Unknown error'}`);
-    } else {
-      newNotification("success", `Featured ${type} updated!`);
     }
   } catch (err) {
     newNotification("error", `Network error updating featured ${type}`);
   }
+}
+
+function createPullParticles() {
+  pullWarpParticles.innerHTML = '';
+
+  const particleCount = 24;
+
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('span');
+
+    particle.className = 'pull-warp-particle';
+
+    particle.style.setProperty(
+      '--angle',
+      `${Math.random() * 360}deg`
+    );
+
+    particle.style.setProperty(
+      '--distance',
+      `${200 + Math.random() * 500}px`
+    );
+
+    particle.style.setProperty(
+      '--duration',
+      `${0.8 + Math.random() * 1.4}s`
+    );
+
+    particle.style.setProperty(
+      '--delay',
+      `${Math.random() * -2}s`
+    );
+
+    particle.style.setProperty(
+      '--size',
+      `${1 + Math.random() * 2}px`
+    );
+
+    pullWarpParticles.appendChild(particle);
+  }
+}
+
+function showPullLoading() {
+  pullLoadingOverlay.classList.remove('five-star');
+  createPullParticles();
+
+  pullLoadingOverlay.classList.remove('hidden', 'finishing');
+  pullLoadingOverlay.classList.add('flex');
+
+  requestAnimationFrame(() => {
+    pullLoadingOverlay.classList.add('visible');
+  });
+
+  let messageIndex = 0;
+
+  pullWarpStatus.textContent =
+    pullLoadingMessages[messageIndex];
+
+  pullStatusInterval = setInterval(() => {
+    messageIndex =
+      (messageIndex + 1) % pullLoadingMessages.length;
+
+    pullWarpStatus.textContent =
+      pullLoadingMessages[messageIndex];
+  }, 1300);
+}
+
+function hidePullLoading(animate = true) {
+  clearInterval(pullStatusInterval);
+  pullStatusInterval = null;
+
+  if (!animate) {
+    pullLoadingOverlay.classList.remove(
+      'visible',
+      'flex',
+      'finishing'
+    );
+
+    pullLoadingOverlay.classList.add('hidden');
+
+    return Promise.resolve();
+  }
+
+  return new Promise(resolve => {
+    pullLoadingOverlay.classList.add('finishing');
+
+    setTimeout(() => {
+      pullLoadingOverlay.classList.remove(
+        'visible',
+        'flex',
+        'finishing'
+      );
+
+      pullLoadingOverlay.classList.add('hidden');
+
+      resolve();
+    }, 400);
+  });
 }
